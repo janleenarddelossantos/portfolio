@@ -72,3 +72,73 @@
 .cert-card{flex-wrap:wrap}.cert-card>div:nth-child(2){flex:1;min-width:170px}.cert-card .cert-link{margin-left:78px}
 @media(max-width:800px){.project-art{max-width:none}.project-card{gap:27px}}
 @media(max-width:540px){.project-gallery{padding:9px}.gallery-thumb img{height:38px}.gallery-expand{font-size:10px}.cert-card .cert-link{margin-left:61px}.hero-actions .button{flex:1 1 auto}}
+
+
+/* Targeted layout update: compact circular portrait and SMARTMENU gallery only. */
+@media (min-width:801px){
+  .hero-grid{grid-template-columns:minmax(0,1fr) 270px;gap:clamp(28px,5vw,76px)}
+}
+.hero-visual{width:clamp(185px,21vw,258px);max-width:100%;justify-self:center;align-self:center}
+.hero-visual .portrait-wrap{width:100%;aspect-ratio:1 / 1;border-radius:50%;border:4px solid var(--teal);padding:5px;background:var(--surface);box-shadow:0 12px 38px rgba(0,0,0,.13),0 0 0 8px color-mix(in srgb,var(--teal) 9%,transparent);overflow:hidden}
+.hero-visual .portrait-wrap img{width:100%;height:100%;aspect-ratio:1 / 1;object-fit:cover;object-position:center 38%;border-radius:50%}
+/* Do not stretch screenshot frames to the height of the description. */
+.project-card{grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);gap:clamp(22px,3vw,40px);align-items:start}
+.project-gallery{align-self:start;padding:10px;border-radius:14px}
+.project-gallery .gallery-main,.project-gallery .gallery-open{height:auto;min-height:0;aspect-ratio:auto}
+.project-gallery .gallery-open img{display:block;width:100%;height:auto;max-height:none;aspect-ratio:auto;object-fit:contain;vertical-align:middle}
+.project-gallery .gallery-main{background:transparent}
+.project-gallery .gallery-controls{padding:10px 2px 8px}
+.project-gallery .gallery-thumb img{height:auto;aspect-ratio:16 / 9;object-fit:cover}
+.project-gallery .gallery-privacy-note{margin-top:7px}
+@media(max-width:800px){
+  .hero-grid{grid-template-columns:1fr;gap:38px}
+  .hero-visual{width:min(230px,55vw);justify-self:center}
+  .project-card{grid-template-columns:1fr;gap:24px}
+  .project-gallery{width:100%;max-width:650px}
+}
+@media(max-width:540px){
+  .hero-visual{width:min(190px,52vw)}
+  .project-gallery{padding:8px}
+}
+
+
+/* V5: navigation cleanup, type-on introduction, authentic tool icons, contact panel */
+.site-header .header-inner{justify-content:flex-end}
+.site-header .main-nav{margin-left:0}
+.site-header .header-controls{margin-left:0}
+.hero h1 .name-line{display:block;color:var(--ink)}
+.hero h1 .name-accent{color:var(--teal)}
+.hero-intro,.hero h1 .name-line{position:relative}
+.hero-intro.type-active::after,.hero h1 .name-line.type-active::after{content:"";display:inline-block;width:3px;height:.85em;background:var(--teal);margin-left:5px;vertical-align:-.06em;animation:caret-blink .7s steps(1) infinite}
+@keyframes caret-blink{50%{opacity:0}}
+.tech-chip{display:inline-flex;align-items:center;gap:7px;line-height:1.35}
+.tech-chip img{width:18px;height:18px;object-fit:contain;flex:none}
+.skill-card .tags{gap:9px}
+.skill-card .tags .tech-chip{padding:8px 11px;font-size:12px}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(45px,7vw,110px);align-items:start}
+.contact-copy h2{font-family:Manrope,Arial,sans-serif;font-size:clamp(38px,4.2vw,56px);line-height:1.2;letter-spacing:-2px;margin:12px 0 22px}
+.contact-copy h2 em{font-style:normal;color:var(--teal)}
+.contact-heading-mark{font-size:.58em;color:var(--teal);vertical-align:9%;margin-right:9px}
+.contact-copy>p:not(.contact-kicker){color:var(--muted);max-width:480px}
+.contact-details{display:flex;flex-direction:column;gap:15px;margin-top:33px}
+.contact-details a{display:flex;align-items:center;gap:12px;font-size:14px;overflow-wrap:anywhere;transition:color .2s}
+.contact-details a:hover{color:var(--teal)}
+.contact-details a span{display:grid;place-items:center;color:var(--teal);font-size:20px;width:27px;flex:none}
+.contact-form-note{font-size:12px;margin-top:28px}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.contact-form input,.contact-form textarea{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:13px 15px;font:inherit;font-size:14px;color:var(--ink);width:100%;outline:none;transition:border-color .2s,box-shadow .2s}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--muted);opacity:.85}
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px color-mix(in srgb,var(--teal) 12%,transparent)}
+.contact-form textarea{resize:vertical;min-height:125px}
+.contact-submit{width:100%;cursor:pointer;justify-content:center}
+.contact-form-hint{font-size:11px;color:var(--muted);text-align:center;margin:0}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:800px){.site-header .header-controls{margin-left:auto}.contact-layout{grid-template-columns:1fr;gap:32px}.contact-copy h2{font-size:40px}}
+@media(max-width:540px){.contact-copy h2{font-size:36px}.contact-form input,.contact-form textarea{font-size:16px}.hero h1{min-height:2.3em}}
+@media(prefers-reduced-motion:reduce){.type-active::after{animation:none!important}}
+
+/* V8: Remove unused hero footer and tighten hero-to-About spacing. */
+.hero{min-height:0;justify-content:flex-start;padding-bottom:42px}
+.hero-grid{flex:initial}
+.about-section{padding-top:55px}
+@media(max-width:800px){.hero{padding-bottom:32px}.about-section{padding-top:44px}}

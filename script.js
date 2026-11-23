@@ -112,3 +112,54 @@ document.querySelector('.dialog-close').addEventListener('click', () => galleryD
 galleryDialog.addEventListener('click', event => {
   if (event.target === galleryDialog) galleryDialog.close();
 });
+
+
+// One-time, sequential typing animation, respecting reduced motion and keeping text readable without JS.
+(() => {
+  const intro = document.querySelector('[data-type-intro]');
+  const first = document.querySelector('[data-type-name-first]');
+  const last = document.querySelector('[data-type-name-last]');
+  if (!intro || !first || !last || reduceMotion) return;
+  const steps = [intro, first, last];
+  const originals = steps.map(el => el.textContent);
+  // The text stays accessible via the heading's aria-label while animating.
+  steps.forEach(el => { el.textContent = ''; });
+  let step = 0;
+  let index = 0;
+  function typeNext() {
+    if (step >= steps.length) return;
+    const el = steps[step];
+    el.classList.add('type-active');
+    if (index < originals[step].length) {
+      el.textContent += originals[step][index++];
+      window.setTimeout(typeNext, step === 0 ? 60 : 75);
+    } else {
+      el.classList.remove('type-active');
+      step++;
+      index = 0;
+      window.setTimeout(typeNext, 240);
+    }
+  }
+  window.setTimeout(typeNext, 350);
+})();
+
+// Static hosting: compose an email from contact form values, without claiming delivery.
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!contactForm.reportValidity()) return;
+    const data = new FormData(contactForm);
+    const name = String(data.get('name') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const subject = String(data.get('subject') || '').trim();
+    const message = String(data.get('message') || '').trim();
+    const body = `From: ${name} (${email})\n\n${message}`;
+    // Open Gmail compose in a separate tab. The visitor reviews and sends it themselves.
+    // No message is transmitted by this website.
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent('johnleenardc.delossantos@gmail.com')}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const newTab = window.open(gmailUrl, '_blank');
+    if (newTab) newTab.opener = null;
+    else window.location.href = gmailUrl;
+  });
+}
