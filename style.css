@@ -142,3 +142,9 @@
 .hero-grid{flex:initial}
 .about-section{padding-top:55px}
 @media(max-width:800px){.hero{padding-bottom:32px}.about-section{padding-top:44px}}
+
+/* Dark mode profile picture alignment */
+html[data-theme="dark"] .portrait-wrap img {
+    transform: scale(1.25);
+    object-position: center;
+}

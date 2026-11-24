@@ -57,6 +57,15 @@ const themeButton = document.querySelector('.theme-toggle');
 const themeMeta = document.querySelector('meta[name="theme-color"]');
 function syncThemeButton() {
   const dark = document.documentElement.dataset.theme === 'dark';
+
+    const profileImage = document.querySelector('.portrait-wrap img');
+
+  if (profileImage) {
+    profileImage.src = dark
+      ? 'assets/profile-dark.webp'
+      : 'assets/profile.webp';
+  }
+
   themeButton.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
   themeButton.setAttribute('aria-pressed', String(dark));
   themeButton.title = dark ? 'Switch to light theme' : 'Switch to dark theme';
